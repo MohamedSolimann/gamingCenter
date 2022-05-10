@@ -15,7 +15,11 @@ async function getUsers() {
 }
 async function getUser(userId) {
   const user = await userModel.findOne({ _id: userId });
-  return user;
+  if (user) {
+    return user;
+  } else {
+    throw new Error("No user found!");
+  }
 }
 async function updateUser(userInfo, userId) {
   let updatedReqBody = updatedBody(userInfo);
