@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-
+import mongoose from "mongoose";
 var userSchema = new mongoose.Schema({
   _id: {
     type: mongoose.Schema.Types.ObjectId,
@@ -8,37 +7,31 @@ var userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
-    unique: true,
   },
   email: {
     type: String,
     required: true,
   },
-  mobile: {
-    type: String,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  image: {
-    type: String,
-  },
   bio: {
     type: String,
   },
   videos: {
-    type: String,
+    type: Array,
   },
   age: {
-    type: String,
+    type: Number,
     required: true,
   },
   games: {
-    type: String,
+    type: Array,
     required: true,
   },
+  createdAt: {
+    type: Date,
+  },
+  deletedAt: {
+    type: Date,
+  },
 });
-
-module.exports = mongoose.model("User", userSchema);
+const userModel = mongoose.model("User", userSchema);
+export { userModel };
