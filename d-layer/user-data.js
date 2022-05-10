@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { userModel } from "../models/user-model.js";
-import { updatedBody } from "./index.js";
+import { updateReqBody } from "./index.js";
 
 async function createUser(userInfo) {
   userInfo._id = mongoose.Types.ObjectId();
@@ -22,11 +22,11 @@ async function getUser(userId) {
   }
 }
 async function updateUser(userInfo, userId) {
-  let updatedReqBody = updatedBody(userInfo);
-  const updatedUser = await userModel.findOneAndModify(
+  let updatedReqBody = updateReqBody(userInfo);
+  const updatedUser = await userModel.findOneAndUpdate(
     { _id: userId },
     { $set: { updatedReqBody } },
-    { new: true }
+    { returnOriginal: false }
   );
   return updatedUser;
 }

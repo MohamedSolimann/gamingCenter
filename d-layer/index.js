@@ -12,8 +12,8 @@ const dbConnect = () => {
   );
 };
 
-const updatedBody = (body) => {
-  let updatedBody;
+const updateReqBody = (body) => {
+  let updatedBody = {};
   if (body.username) {
     updatedBody.username = body.username;
   }
@@ -40,4 +40,4 @@ const updatedBody = (body) => {
   }
   return updatedBody;
 };
-export { dbConnect, updatedBody };
+export { dbConnect, updateReqBody };

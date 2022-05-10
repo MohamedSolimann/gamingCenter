@@ -35,28 +35,41 @@ router.get("/:id", async (req, res) => {
     const user = await getUser(userId);
     res.status(201).json({ message: "Success", data: user });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    if (error.message) {
+      res.status(400).json({ message: error.message });
+    } else {
+      res.status(500).json({ message: "server error" });
+    }
   }
 });
 router.put("/:id", async (req, res) => {
   const { username, password, image, bio, age, mobile, videos, email, games } =
     req.body;
   const userId = req.params.id;
-  const updatedUser = await updateUser(
-    {
-      username,
-      password,
-      image,
-      bio,
-      age,
-      mobile,
-      videos,
-      email,
-      games,
-    },
-    userId
-  );
-  res.status(201).json({ message: "Success", data: newUser });
+  try {
+    const user = await getUser(userId);
+    const updatedUser = await updateUser(
+      {
+        username,
+        password,
+        image,
+        bio,
+        age,
+        mobile,
+        videos,
+        email,
+        games,
+      },
+      userId
+    );
+    res.status(201).json({ message: "Success", data: updatedUser });
+  } catch (error) {
+    if (error.message) {
+      res.status(400).json({ message: error.message });
+    } else {
+      res.status(500).json({ message: "server error" });
+    }
+  }
 });
 
 export { router };
