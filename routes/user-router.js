@@ -71,5 +71,18 @@ router.put("/:id", async (req, res) => {
     }
   }
 });
-
+router.delete("/:id", async (req, res) => {
+  const userId = req.params.id;
+  try {
+    const user = await getUser(userId);
+    const deletedUser = await deleteUser(userId);
+    res.status(201).json({ message: "Success", data: deletedUser });
+  } catch (error) {
+    if (error.message) {
+      res.status(400).json({ message: error.message });
+    } else {
+      res.status(500).json({ message: "server error" });
+    }
+  }
+});
 export { router };

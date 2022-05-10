@@ -31,7 +31,7 @@ async function updateUser(userInfo, userId) {
   return updatedUser;
 }
 async function deleteUser(userId) {
-  const deletedUser = await userModel.findOneAndModify(
+  const deletedUser = await userModel.findOneAndUpdate(
     { _id: userId },
     { $set: { deletedAt: Date() } }
   );
