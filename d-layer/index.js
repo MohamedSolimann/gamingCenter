@@ -1,5 +1,6 @@
 import config from "config";
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
 const dbConnect = () => {
   mongoose.connect(
@@ -40,4 +41,10 @@ const updateReqBody = (body) => {
   }
   return updatedBody;
 };
-export { dbConnect, updateReqBody };
+const udpateUserInfo = (userInfo) => {
+  userInfo._id = mongoose.Types.ObjectId();
+  userInfo.createdAt = Date();
+  userInfo.passowrd = bcrypt.hashSync(passowrd, 8);
+  return userInfo;
+};
+export { dbConnect, updateReqBody, udpateUserInfo };

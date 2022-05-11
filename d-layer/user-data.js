@@ -1,11 +1,9 @@
-import mongoose from "mongoose";
 import { userModel } from "../models/user-model.js";
-import { updateReqBody } from "./index.js";
+import { updateReqBody, udpateUserInfo } from "./index.js";
 
 async function createUser(userInfo) {
-  userInfo._id = mongoose.Types.ObjectId();
-  userInfo.createdAt = Date();
-  const newUser = new userModel(userInfo);
+  const updatedUserInfo = udpateUserInfo(userInfo);
+  const newUser = new userModel(updatedUserInfo);
   await newUser.save();
   return newUser;
 }
