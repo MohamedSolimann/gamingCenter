@@ -12,6 +12,13 @@ var userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  moblie: {
+    type: String,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
   bio: {
     type: String,
   },
@@ -20,11 +27,9 @@ var userSchema = new mongoose.Schema({
   },
   age: {
     type: Number,
-    required: true,
   },
   games: {
     type: Array,
-    required: true,
   },
   createdAt: {
     type: Date,

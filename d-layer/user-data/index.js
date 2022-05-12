@@ -1,17 +1,4 @@
-import config from "config";
-import mongoose from "mongoose";
 import bcrypt from "bcrypt";
-
-const dbConnect = () => {
-  mongoose.connect(
-    `mongodb://${config.get("DB.host")}:${config.get("DB.port")}/${config.get(
-      "DB.name"
-    )}`,
-    () => {
-      console.log("db connected");
-    }
-  );
-};
 
 const updateReqBody = (body) => {
   let updatedBody = {};
@@ -44,7 +31,7 @@ const updateReqBody = (body) => {
 const udpateUserInfo = (userInfo) => {
   userInfo._id = mongoose.Types.ObjectId();
   userInfo.createdAt = Date();
-  userInfo.passowrd = bcrypt.hashSync(passowrd, 8);
+  userInfo.password = bcrypt.hashSync(userInfo.password, 8);
   return userInfo;
 };
-export { dbConnect, updateReqBody, udpateUserInfo };
+export { updateReqBody, udpateUserInfo };

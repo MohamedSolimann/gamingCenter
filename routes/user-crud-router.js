@@ -5,11 +5,11 @@ import {
   deleteUser,
   getUser,
   getUsers,
-} from "../d-layer/user-data.js";
+} from "../d-layer/user-data/user-crud-data.js";
 
-const router = express.Router();
+const userCRUDRouter = express.Router();
 
-router.post("/", async (req, res) => {
+userCRUDRouter.post("/", async (req, res) => {
   const { username, password, image, bio, age, mobile, videos, email, games } =
     req.body;
   const newUser = await createUser({
@@ -25,11 +25,11 @@ router.post("/", async (req, res) => {
   });
   res.status(201).json({ message: "Success", data: newUser });
 });
-router.get("/", async (req, res) => {
+userCRUDRouter.get("/", async (req, res) => {
   const users = await getUsers();
   res.status(200).json({ message: "Success", data: users });
 });
-router.get("/:id", async (req, res) => {
+userCRUDRouter.get("/:id", async (req, res) => {
   const userId = req.params.id;
   try {
     const user = await getUser(userId);
@@ -42,7 +42,7 @@ router.get("/:id", async (req, res) => {
     }
   }
 });
-router.put("/:id", async (req, res) => {
+userCRUDRouter.put("/:id", async (req, res) => {
   const { username, password, image, bio, age, mobile, videos, email, games } =
     req.body;
   const userId = req.params.id;
@@ -71,7 +71,7 @@ router.put("/:id", async (req, res) => {
     }
   }
 });
-router.delete("/:id", async (req, res) => {
+userCRUDRouter.delete("/:id", async (req, res) => {
   const userId = req.params.id;
   try {
     const user = await getUser(userId);
@@ -85,4 +85,4 @@ router.delete("/:id", async (req, res) => {
     }
   }
 });
-export { router };
+export { userCRUDRouter };

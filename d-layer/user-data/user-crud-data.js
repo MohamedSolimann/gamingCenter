@@ -1,4 +1,4 @@
-import { userModel } from "../models/user-model.js";
+import { userModel } from "../../models/user-model.js";
 import { updateReqBody, udpateUserInfo } from "./index.js";
 
 async function createUser(userInfo) {
